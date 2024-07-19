@@ -14,8 +14,8 @@ To use the models and run the example provided, please follow these steps:
 
 1. Clone this repository:
     ```sh
-    git clone https://github.com/BellaNico4/TRANSFER_LEARNING_JOURNAL_PAPER
-    cd TRANSFER_LEARNING_JOURNAL_PAPER
+    git clone https://github.com/BellaNico4/DL-Strategies-in-MCU-Screening
+    cd DL-Strategies-in-MCU-Screening
     ```
 
 2. Create and activate a virtual environment with conda:
