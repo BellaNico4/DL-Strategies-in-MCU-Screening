@@ -6,6 +6,8 @@ This repository contains the implementation of the deep learning-based framework
 
 Our framework leverages Semi-Supervised Learning (SSL) and Transfer Learning to optimize the performance screening of microcontrollers (MCUs). The approach reduces the prediction error and minimizes the need for labeled samples, enhancing the efficiency of the MCU characterization phase and data collection.
 
+[![plot](media/TRANSFER_LEARNING_DIAGRAM.png)]
+
 ## Installation
 
 To use the models and run the example provided, please follow these steps:
@@ -46,6 +48,8 @@ The framework is designed to:
 - Use deep neural networks as feature extractors.
 - Leverage transfer learning to adapt models to new products and families.
 - Minimize prediction error and guardband, enhancing process yield.
+
+We both provided the architecture and the pretrained weights for two of the CNNs described in the paper (Pseudo-Labeling CNN, PL-CNN and AutoEncoder-CNN, AE-CNN). We also provided pretrained weights on artificial data with which reproduce the framework behavior.
 
 For more details on the model architecture and training process, refer to the paper [Deep Learning Strategies for Labeling and Accuracy Optimization in Microcontroller Performance Screening](https://doi.org/XXXXXX).
 
