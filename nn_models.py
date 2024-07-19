@@ -161,8 +161,8 @@ class SoftOrdering1DCNN(pl.LightningModule):
         self.log('test_loss', loss)
         self.log('test_metric', metric)
 
-    def configure_optimizers(self,lr=1e-4,momentum=0.7,weight_decay=0):
-        optimizer = torch.optim.SGD(self.parameters(), lr=lr,momentum=momentum,weight_decay=weight_decay)
+    def configure_optimizers(self,lr=1e-3,weight_decay=0):
+        optimizer = torch.optim.Adam(self.parameters(), lr=lr,weight_decay=weight_decay)
         scheduler = {
             'scheduler': ReduceLROnPlateau(
                 optimizer,
@@ -201,9 +201,9 @@ class RegressionNN(pl.LightningModule):
 
     def training_step(self, batch, batch_idx):
         X, y = batch
-        y_hat = self.forward(X)
+        y_hat = self.forward(X).squeeze()
         loss = self.loss(y_hat, y)
-        self.log('train_loss', loss)
+        self.log('train_loss', loss, on_step=True, on_epoch=True)
         return loss
 
     def set_eval_mode(self):
@@ -218,20 +218,20 @@ class RegressionNN(pl.LightningModule):
 
     def validation_step(self, batch, batch_idx):
         X, y = batch
-        y_hat = self.forward(X)
+        y_hat = self.forward(X).squeeze()
         loss = self.loss(y_hat, y)
-        self.log('valid_loss', loss)
+        self.log('valid_loss', loss,on_step=True, on_epoch=True)
 
     def test_step(self, batch, batch_idx):
         X, y = batch
         y_logit = self.forward(X)
         loss = self.loss(y_logit, y)
         metric = mean_absolute_error(y.cpu().numpy(), y_logit.detach().cpu().numpy())
-        self.log('test_loss', loss)
-        self.log('test_metric', metric)
+        self.log('test_loss', loss,on_step=True, on_epoch=True)
+        self.log('test_metric', metric,on_step=True, on_epoch=True)
 
-    def configure_optimizers(self,lr=1e-3,momentum=0.6,weight_decay=0):
-        optimizer = torch.optim.SGD(self.parameters(), lr=lr,momentum=momentum,weight_decay=weight_decay)
+    def configure_optimizers(self,lr=1e-3,weight_decay=0):
+        optimizer = torch.optim.Adam(self.parameters(), lr=lr,weight_decay=weight_decay)
         scheduler = {
             'scheduler': ReduceLROnPlateau(
                 optimizer,
@@ -245,7 +245,6 @@ class RegressionNN(pl.LightningModule):
             'monitor': 'valid_loss',
         }
         return [optimizer], [scheduler]
-
 
 class SoftOrdering1DCNN_AutoEncoder(pl.LightningModule):
 
@@ -528,7 +527,7 @@ class SoftOrdering1DCNN_AutoEncoder(pl.LightningModule):
      
 class SoftOrderingTrasnformer(BaseEstimator, TransformerMixin):
     def __init__(self, transformer_class,parameter_dict,allow_training=False,val_ratio=0.15,random_state=42,batch_size=16,callbacks = 
-                 [EarlyStopping(monitor='valid_loss',min_delta=.01,patience=30,verbose=True,mode='min')],
+                 [EarlyStopping(monitor='valid_loss',min_delta=.00001,patience=30,verbose=True,mode='min')],
                  epochs=100,pre_trained_ckpt=None,device='cpu'):
         # save the features list internally in the class
         self.transformer_class = transformer_class
@@ -599,6 +598,24 @@ class SoftOrderingTrasnformer(BaseEstimator, TransformerMixin):
         X_transformed = torch.tensor(X, dtype=torch.float).to(self.transformer.device)
         X_transformed = self.transformer(X_transformed).detach().cpu().numpy()
         return X_transformed
+    
+    def freeze(self):
+        self.transformer.eval()
+        self.allow_training = False
+        for param in self.transformer.parameters():
+            param.requires_grad = False
+        return self
+    
+    def train(self):
+        self.transformer.train()
+        self.allow_training = True
+        for param in self.transformer.parameters():
+            param.requires_grad = True
+        return self
+    
+    def save_ckpt(self,ckpt_path):
+        torch.save(self.transformer.state_dict(), ckpt_path)
+        return self
     
     
 class DummySelector(BaseEstimator, TransformerMixin):
