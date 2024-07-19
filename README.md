@@ -73,4 +73,3 @@ If you use this code in your research, please cite the paper:
 ## Contact
 
 For any questions or comments, please contact Nicolo' Bellarmino at [nicolo.bellarmino@polito.it].
-```
