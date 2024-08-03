@@ -62,16 +62,17 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 If you use this code in your research, please cite the paper:
 
 ```
-@article{bellarmino2024,
-  title={Deep Learning Strategies for Labeling and Accuracy Optimization in Microcontroller Performance Screening},
-  author={Nicolo' Bellarmino and Riccardo Cantoro and Martin Huch and Tobias Kilian and Ulf Schlichtmann and Giovanni Squillero},
-  journal={Transactions on Computer-Aided Design},
-  volume={X},
-  number={Y},
-  pages={Z},
+@ARTICLE{bellarmino2024,
+  author={Bellarmino, Nicolò and Cantoro, Riccardo and Huch, Martin and Kilian, Tobias and Schlichtmann, Ulf and Squillero, Giovanni},
+  journal={IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems}, 
+  title={Deep Learning Strategies for Labeling and Accuracy Optimization in Microcontroller Performance Screening}, 
   year={2024},
-  publisher={IEEE}
-}
+  volume={},
+  number={},
+  pages={1-1},
+  keywords={Transfer learning;Predictive models;Feature extraction;Data models;Testing;Microcontrollers;Accuracy;Fmax;Speed Monitors;Ring Oscillators;Speed Binning;Machine Learning;Device Testing;Manufacturing;Transfer Learning;Deep Learning},
+  doi={10.1109/TCAD.2024.3436542}}
+
 ```
 
 ## Contact
