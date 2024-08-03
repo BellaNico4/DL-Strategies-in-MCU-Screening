@@ -51,7 +51,7 @@ The framework is designed to:
 
 We both provided the architecture and the pretrained weights for two of the CNNs described in the paper (Pseudo-Labeling CNN, PL-CNN and AutoEncoder-CNN, AE-CNN). We also provided pretrained weights on artificial data with which reproduce the framework behavior.
 
-For more details on the model architecture and training process, refer to the paper [Deep Learning Strategies for Labeling and Accuracy Optimization in Microcontroller Performance Screening](https://doi.org/XXXXXX).
+For more details on the model architecture and training process, refer to the paper [Deep Learning Strategies for Labeling and Accuracy Optimization in Microcontroller Performance Screening](https://ieeexplore.ieee.org/document/10620213).
 
 ## License
 
