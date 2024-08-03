@@ -72,7 +72,6 @@ If you use this code in your research, please cite the paper:
   pages={1-1},
   keywords={Transfer learning;Predictive models;Feature extraction;Data models;Testing;Microcontrollers;Accuracy;Fmax;Speed Monitors;Ring Oscillators;Speed Binning;Machine Learning;Device Testing;Manufacturing;Transfer Learning;Deep Learning},
   doi={10.1109/TCAD.2024.3436542}}
-
 ```
 
 ## Contact
